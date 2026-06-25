@@ -59,3 +59,13 @@ ul {
 ul li {
   margin: 12px 0;
 }
+
+/* Dashboard action buttons */
+
+button {
+  margin: 10px;
+}
+
+.dashboard-actions {
+  margin-top: 30px;
+}

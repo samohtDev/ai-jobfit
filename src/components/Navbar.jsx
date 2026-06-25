@@ -1,3 +1,5 @@
+// Main navigation that is displayed at the top of the landing page
+
 function Navbar() {
     return (
         <nav className="container">

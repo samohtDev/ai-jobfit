@@ -1,3 +1,5 @@
+// Hero section introducing AI JobFit and its core purpose
+
 function Hero() {
     return (
         <section className="container">

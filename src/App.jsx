@@ -1,10 +1,10 @@
-import LandingPage from "./pages/LandingPage";
 import "./assets/Layout.css";
 import "./assets/ComponentStyles.css";
-// import LoginPage from "./pages/LoginPage";
+
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-  return <LandingPage />
+  return <AppRoutes />;
 }
 
 export default App;

@@ -1,6 +1,6 @@
 // Main dashboard displayed after user login
 
-import CVLibrary from "../components/dashboard/CVLibrary";
+import CVProfiles from "../components/dashboard/CVProfiles";
 
 function DashboardPage() {
   return (
@@ -8,7 +8,7 @@ function DashboardPage() {
 
         <h1>Dashboard</h1>
 
-        <CVLibrary />
+        <CVProfiles />
 
       </div> 
     

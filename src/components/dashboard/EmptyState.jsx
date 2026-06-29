@@ -5,20 +5,20 @@
  * added any CVs.
  */
 
-import AddCVButton from "./AddCVButton";
+import CreateCVProfileButton from "./CreateCVProfileButton";
 
-function EmptyState() {
+function EmptyState({ onCreateProfile }) {
   return (
     <div className="empty-state">
 
-      <h2>No CVs Yet</h2>
+      <h2>No CV Profiles Yet</h2>
 
       <p>
         Create your first CV profile to begin
         optimizing job applications with AI JobFit.
       </p>
 
-      <AddCVButton />
+      <CreateCVProfileButton onClick={onCreateProfile} />
 
     </div>
   );

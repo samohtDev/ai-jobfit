@@ -1,10 +1,10 @@
 /**
- * Component: CVCard
+ * Component: CVProfileCard
  *
  * Displays a single CV in the user's library.
  */
 
-function CVCard() {
+function CVProfileCard() {
   return (
     <div className="cv-card">
 
@@ -28,4 +28,4 @@ function CVCard() {
   );
 }
 
-export default CVCard;
+export default CVProfileCard;

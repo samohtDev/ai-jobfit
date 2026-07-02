@@ -7,14 +7,17 @@
 
 import CreateCVProfileForm from "./CreateCVProfileForm";
 
-function CreateCVProfileModal({ onClose }) {
+function CreateCVProfileModal({onClose, onProfileCreated,}) {
   return (
     <div className="modal-overlay">
       <div className="modal">
 
         <h2>Create CV Profile</h2>
 
-        <CreateCVProfileForm />
+        <CreateCVProfileForm
+          onClose={onClose}
+          onProfileCreated={onProfileCreated}
+        />
 
         <button onClick={onClose}>
           Cancel

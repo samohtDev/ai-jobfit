@@ -1,31 +1,35 @@
 /**
+ * ==========================================================
  * Component: CVProfileCard
+ * ==========================================================
  *
- * Displays a single CV in the user's library.
+ * Purpose:
+ * Displays a single CV Profile.
+ *
+ * Props:
+ * profile
+ *
+ * Received From:
+ * CVProfiles.jsx
+ *
+ * Responsibilities:
+ * - Display profile information
+ * - (Future) Open profile
+ * - (Future) Edit profile
+ * - (Future) Delete profile
+ * ==========================================================
  */
 
-function CVProfileCard() {
-  return (
-    <div className="cv-card">
+function CVProfileCard({ profile }) {
+    return (
+        <div>
 
-      <h3>Software Developer CV</h3>
+            <h3>{profile.profileName}</h3>
 
-      <p>
-        Career: Software Development
-      </p>
+            <p>{profile.targetCareer}</p>
 
-      <p>
-        ATS Baseline: Not analyzed yet
-      </p>
-
-      <button>Download</button>
-
-      <button>Replace</button>
-
-      <button>Delete</button>
-
-    </div>
-  );
+        </div>
+    );
 }
 
 export default CVProfileCard;

@@ -7,17 +7,47 @@
 import EmptyState from "./EmptyState";
 import { useState } from "react";
 import CreateCVProfileModal from "./CreateCVProfileModal";
+import CVProfileCard from "./CVProfileCard";
 
 
 function CVProfiles() {
 
   const [showModal, setShowModal] = useState(false);
 
-  const hasCVs = false;
+  /**
+ * CV Profiles
+ *
+ * Stores every CV Profile belonging
+ * to the current user.
+ *
+ * For now this simulates the database.
+ */
+  const [cvProfiles, setCVProfiles] = useState([]);
 
   const openModal = () => {
   setShowModal(true);
 };
+
+
+/**
+ * Adds a newly created profile
+ * to the CV Library.
+ *
+ * Called by:
+ * CreateCVProfileModal
+ */
+const handleProfileCreated = (newProfile) => {
+
+    setCVProfiles((previousProfiles) => [
+
+        ...previousProfiles,
+
+        newProfile,
+
+    ]);
+
+};
+
 
 const closeModal = () => {
   setShowModal(false);
@@ -29,17 +59,31 @@ const closeModal = () => {
       <h2>My CV Profiles</h2>
 
       {
-        hasCVs
+        cvProfiles.length > 0
           ? (
-            <p>CV cards will appear here.</p>
-          )
+              <div>
+                {
+                  cvProfiles.map((profile) => (
+                    <CVProfileCard
+                      key={profile.profileName}
+                      profile={profile}
+                    />
+                  ))
+                }
+              </div>
+            )
           : (
-            <EmptyState onCreateProfile={openModal} />
-          )
+              <EmptyState
+                  onCreateProfile={openModal}
+              />
+            )
       }
 
       {showModal && (
-          <CreateCVProfileModal onClose={closeModal} />
+          <CreateCVProfileModal
+            onClose={closeModal}
+            onProfileCreated={handleProfileCreated}
+          />
       )}
     </section>
   );

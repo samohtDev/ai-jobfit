@@ -17,8 +17,12 @@
 import { useState } from "react";
 import { CAREER_CATEGORIES } from "../../constants/careerCategories";
 import "../../styles/createCVProfileForm.css";
+import { saveCVProfile } from "../../services/cvProfileService";
 
-function CreateCVProfileForm() {
+function CreateCVProfileForm({
+    onClose,
+    onProfileCreated,
+}) {
     /**
  * Form State
  *
@@ -135,6 +139,7 @@ const handleFileChange = (event) => {
  * true  -> Form is valid.
  * false -> Validation failed.
  */
+
 const validateForm = () => {
 
     const validationErrors = {};
@@ -162,6 +167,47 @@ const validateForm = () => {
 
 
 /**
+ * ==========================================================
+ * Function: createCVProfileObject
+ * ==========================================================
+ *
+ * Purpose:
+ * Converts the form data into a standardized
+ * CV Profile object that can be stored
+ * in the database.
+ *
+ * Called By:
+ * handleCreateProfile()
+ *
+ * Reads:
+ * formData
+ *
+ * Returns:
+ * A complete CV Profile object.
+ *
+ * Why Separate?
+ * Keeps database structure independent
+ * from the UI.
+ * ==========================================================
+ */
+
+const createCVProfileObject = () => {
+
+    return {
+
+        profileName: formData.profileName.trim(),
+
+        targetCareer: formData.targetCareer,
+
+        description: formData.description.trim(),
+
+        originalCV: formData.originalCV,
+
+    };
+
+};
+
+/**
  * Function: handleCreateProfile
  *
  * Purpose:
@@ -176,7 +222,8 @@ const validateForm = () => {
  * NOTE:
  * Saving to Firebase will be added in the next sprint.
  */
-const handleCreateProfile = (event) => {
+
+const handleCreateProfile = async (event) => {
   event.preventDefault();
 
   const isValid = validateForm();
@@ -185,8 +232,20 @@ const handleCreateProfile = (event) => {
     return;
   }
 
-  console.log("Form is valid.");
-  console.log(formData);
+  const profile = createCVProfileObject();
+
+  const savedProfile = await saveCVProfile(profile);
+
+  /**
+   * Notify the parent component
+   * that a new profile has been created.
+   */
+  onProfileCreated(savedProfile);
+
+  /**
+   * Close the modal after a successful save.
+   */
+  onClose();
 };
 
 

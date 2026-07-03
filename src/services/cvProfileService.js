@@ -1,34 +1,45 @@
 /**
  * ==========================================================
- * CV Profile Service
+ * Service: saveCVProfile
  * ==========================================================
  *
  * Purpose:
- * Handles all operations related to CV Profiles.
- *
- * This is the ONLY place that should know
- * how CV Profiles are saved or loaded.
- *
- * Current Version:
- * Logs the profile to simulate saving.
- *
- * Future Version:
- * Will save to Firebase Firestore.
- * ==========================================================
- */
-
-/**
  * Saves a CV Profile.
  *
- * @param {Object} profile
- * @returns {Promise<Object>}
+ * Current Version:
+ * Mock implementation.
+ *
+ * Future Version:
+ * 1. Upload CV to Firebase Storage.
+ * 2. Save profile metadata to Firestore.
+ * 3. Return the saved profile.
+ * ==========================================================
  */
 
 export const saveCVProfile = async (profile) => {
 
-    console.log("Saving profile...");
+    console.log("Starting profile save...");
 
-    console.log(profile);
+    /**
+     * STEP 1
+     * Upload CV
+     */
+
+    console.log("Uploading CV...");
+
+    /**
+     * STEP 2
+     * Save profile
+     */
+
+    console.log("Saving profile data...");
+
+    /**
+     * STEP 3
+     * Finished
+     */
+
+    console.log("Profile saved successfully.");
 
     return profile;
 

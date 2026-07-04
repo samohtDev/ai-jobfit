@@ -1,34 +1,55 @@
 // Main dashboard displayed after user login
 
 import CVProfiles from "../components/dashboard/CVProfiles";
+import { logoutUser } from "../services/authService";
+import { useNavigate } from "react-router-dom";
 
 function DashboardPage() {
+
+  const navigate = useNavigate();
+  
+    /**
+   * ==========================================================
+   * Handles user logout.
+   *
+   * Flow:
+   * Logout Button
+   *       ↓
+   * Firebase Sign Out
+   *       ↓
+   * AuthProvider updates currentUser
+   *       ↓
+   * Navigate to Login
+   * ==========================================================
+   */
+  const handleLogout = async () => {
+
+      try {
+
+          await logoutUser();
+
+          navigate("/login");
+
+      }
+      catch (error) {
+
+          console.error(error);
+
+      }
+  };
+
   return (
       <div className="container">
 
         <h1>Dashboard</h1>
+        
+        <button onClick={handleLogout}>
+            Logout
+        </button>
 
         <CVProfiles />
 
       </div> 
-    
-    
-    /**
-     * <div className="container">
-        <h1>Dashboard</h1>
-
-        <p>
-            Welcome to AI JobFit. Upload your CV and a Job Description
-            to begin ATS analysis and generate tailored application documents.
-        </p>
-
-        <div className="dashboard-actions">
-            <button>Upload CV</button>
-            <button>Upload Job Description</button>
-            <button>Analyze</button>
-        </div>
-    </div>
-    **/
   );
 }
 

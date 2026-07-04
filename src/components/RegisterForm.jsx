@@ -1,6 +1,8 @@
 // Registration form component
 import { useState } from "react";
 import { registerUser } from "../services/authService";
+import { createUserProfile } from "../services/userService";
+import { useNavigate } from "react-router-dom";
 
 
 function RegisterForm() {
@@ -9,6 +11,7 @@ function RegisterForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
   /**
    * Handles registration form submission.
@@ -40,7 +43,18 @@ function RegisterForm() {
             password,
         );
 
-        console.log("✅ User created successfully!");
+        await createUserProfile(
+          userCredential.user.uid,
+          {
+            fullName,
+            email,
+            role: "jobSeeker",
+            onboardingComplete: false,
+          }
+        );
+        navigate("/dashboard");
+
+        console.log("User created successfully!");
         console.log(userCredential.user);
         alert("Account created successfully!");
       }

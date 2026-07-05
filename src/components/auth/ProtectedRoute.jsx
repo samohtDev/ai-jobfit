@@ -24,7 +24,16 @@ import useAuth from "../../hooks/useAuth";
 
 function ProtectedRoute({ children }) {
 
-    const { currentUser } = useAuth();
+    const {
+        currentUser,
+        loading,
+    } = useAuth();
+
+    if (loading) {
+
+        return <p>Checking authentication...</p>;
+
+    }
 
     if (!currentUser) {
 

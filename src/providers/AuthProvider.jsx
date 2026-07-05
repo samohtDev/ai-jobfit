@@ -21,6 +21,7 @@ import { onAuthStateChanged } from "firebase/auth";
 function AuthProvider({ children }) {
 
     const [currentUser, setCurrentUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
 
@@ -33,6 +34,7 @@ function AuthProvider({ children }) {
                 console.log("Authentication changed:", user);
 
                 setCurrentUser(user);
+                setLoading(false);
 
             }
 
@@ -50,14 +52,17 @@ function AuthProvider({ children }) {
 
     return (
 
-        <AuthContext.Provider value={value}>
-
+        <AuthContext.Provider
+            value={{
+                currentUser,
+                loading,
+            }}
+        >
+            
             {children}
 
         </AuthContext.Provider>
-
     );
-
 }
 
 export default AuthProvider;

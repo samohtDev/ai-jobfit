@@ -5,7 +5,8 @@
  */
 
 import EmptyState from "./EmptyState";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getCVProfiles } from "../../services/cvProfileService";
 import CreateCVProfileModal from "./CreateCVProfileModal";
 import CVProfileCard from "./CVProfileCard";
 
@@ -48,6 +49,31 @@ const handleProfileCreated = (newProfile) => {
 
 };
 
+const loadCVProfiles = async () => {
+
+    try {
+
+        const profiles = await getCVProfiles();
+
+        console.log("Profiles from Firestore:", profiles);
+
+        setCVProfiles(profiles);
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+};
+
+useEffect(() => {
+
+    loadCVProfiles();
+
+}, []);
+
 
 const closeModal = () => {
   setShowModal(false);
@@ -65,7 +91,7 @@ const closeModal = () => {
                 {
                   cvProfiles.map((profile) => (
                     <CVProfileCard
-                      key={profile.profileName}
+                      key={profile.id}
                       profile={profile}
                     />
                   ))

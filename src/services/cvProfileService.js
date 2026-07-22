@@ -1,46 +1,69 @@
 /**
  * ==========================================================
- * Service: saveCVProfile
+ * CV Profile Service
  * ==========================================================
  *
  * Purpose:
- * Saves a CV Profile.
+ * Handles all Firestore operations
+ * related to CV Profiles.
  *
- * Current Version:
- * Mock implementation.
+ * Current Features:
+ * - Create Profile
  *
- * Future Version:
- * 1. Upload CV to Firebase Storage.
- * 2. Save profile metadata to Firestore.
- * 3. Return the saved profile.
+ * Future Features:
+ * - Get Profiles
+ * - Update Profile
+ * - Delete Profile
  * ==========================================================
  */
 
-export const saveCVProfile = async (profile) => {
+import {
 
-    console.log("Starting profile save...");
+    collection,
+    addDoc,
+    getDocs,
 
-    /**
-     * STEP 1
-     * Upload CV
-     */
+} from "firebase/firestore";
 
-    console.log("Uploading CV...");
+import { db } from "../firebase/firebaseConfig";
 
-    /**
-     * STEP 2
-     * Save profile
-     */
+/**
+ * ==========================================================
+ * Create a new CV Profile.
+ * ==========================================================
+ */
+export const createCVProfile = async (profile) => {
 
-    console.log("Saving profile data...");
+    return await addDoc(
 
-    /**
-     * STEP 3
-     * Finished
-     */
+        collection(db, "cvProfiles"),
 
-    console.log("Profile saved successfully.");
+        profile,
 
-    return profile;
+    );
+
+};
+
+
+/**
+ * ==========================================================
+ * Get all CV Profiles.
+ * ==========================================================
+ */
+export const getCVProfiles = async () => {
+
+    const querySnapshot = await getDocs(
+
+        collection(db, "cvProfiles")
+
+    );
+
+    return querySnapshot.docs.map((doc) => ({
+
+        id: doc.id,
+
+        ...doc.data(),
+
+    }));
 
 };

@@ -17,7 +17,7 @@
 import { useState } from "react";
 import { CAREER_CATEGORIES } from "../../constants/careerCategories";
 import "../../styles/createCVProfileForm.css";
-import { saveCVProfile } from "../../services/cvProfileService";
+import { createCVProfile } from "../../services/cvProfileService";
 
 function CreateCVProfileForm({
     onClose,
@@ -201,7 +201,7 @@ const createCVProfileObject = () => {
 
         description: formData.description.trim(),
 
-        originalCV: formData.originalCV,
+        originalFileName: formData.originalCV.name,
 
     };
 
@@ -234,7 +234,7 @@ const handleCreateProfile = async (event) => {
 
   const profile = createCVProfileObject();
 
-  const savedProfile = await saveCVProfile(profile);
+  const savedProfile = await createCVProfile(profile);;
 
   /**
    * Notify the parent component
@@ -341,13 +341,11 @@ const handleCreateProfile = async (event) => {
       
 
       <div className="form-actions">
-
           <button type="submit">
 
               Create Profile
 
           </button>
-
       </div>
 
     </form>
